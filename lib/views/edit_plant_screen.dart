@@ -1,8 +1,8 @@
 // Copyright 2020 Green Finger team. All rights reserved.
 
 import 'package:flutter/material.dart';
-import 'package:green_finger/models/plant.dart';
 import 'package:provider/provider.dart';
+import 'package:green_finger/models/plant.dart';
 import 'package:green_finger/models/plant_catalog.dart';
 
 enum EditPlantScreenType {
@@ -84,7 +84,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text('Discard changes?'),
-                  content: Text('Are you sure you want to discard the chages you''ve made?'),
+                  content: Text('Are you sure you want to discard the changes you''ve made?'),
                   actions: <Widget>[
                     FlatButton(
                       child: Text('Discard'),

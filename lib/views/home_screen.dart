@@ -1,8 +1,8 @@
 // Copyright 2020 Green Finger team. All rights reserved.
 
 import 'package:flutter/material.dart';
-import 'package:green_finger/views/edit_plant_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:green_finger/views/edit_plant_screen.dart';
 import 'package:green_finger/models/plant_catalog.dart';
 import 'package:green_finger/views/plant_catalog_screen.dart';
 
