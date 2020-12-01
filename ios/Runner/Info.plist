@@ -41,5 +41,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Pick your plant's pictures</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take your plant's pictures</string>
 </dict>
 </plist>

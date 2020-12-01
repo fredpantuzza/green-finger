@@ -17,8 +17,8 @@ class Application extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) =>
         PlantCatalog(plants: [
-          new Plant(1, 'Test'),
-          new Plant(2, 'Other test'),
+          new Plant(1, 'Test', null),
+          new Plant(2, 'Other test', null),
         ]),
       child: MaterialApp(
         title: 'Green Finger',

@@ -6,8 +6,9 @@ class Plant extends ChangeNotifier
 {
   final int _id;
   String _name;
+  String _mainPicturePath;
 
-  Plant(this._id, this._name);
+  Plant(this._id, this._name, this._mainPicturePath);
 
   int get id => _id;
 
@@ -16,6 +17,14 @@ class Plant extends ChangeNotifier
   set name(String name)
   {
     _name = name;
+    notifyListeners();
+  }
+
+  String get mainPicturePath => _mainPicturePath;
+
+  set mainPicturePath(String mainPicturePath)
+  {
+    _mainPicturePath = mainPicturePath;
     notifyListeners();
   }
 

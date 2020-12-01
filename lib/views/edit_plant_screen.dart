@@ -1,7 +1,12 @@
 // Copyright 2020 Green Finger team. All rights reserved.
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart' as syspaths;
+import 'package:path/path.dart' as path;
 import 'package:green_finger/models/plant.dart';
 import 'package:green_finger/models/plant_catalog.dart';
 
@@ -37,7 +42,24 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  File _mainImage;
+  final _imagePicker = ImagePicker();
+
   final _nameTextEditorController = TextEditingController();
+
+  Future _pickMainImage() async {
+    final pickedImage = await _imagePicker.getImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      // copy the image to the local storage
+      final appDir = await syspaths.getApplicationDocumentsDirectory();
+      final fileName = path.basename(pickedImage.path);
+      final savedImage = await File(pickedImage.path).copy('${appDir.path}/$fileName');
+
+      setState(() {
+        _mainImage = savedImage;
+      });
+    }
+  }
 
   void _submit() {
     // TODO logging
@@ -63,7 +85,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   void _submitNewPlant(PlantCatalog plantCatalog) {
     int newId = plantCatalog.getMaxId() + 1;
     var name = _nameTextEditorController.text;
-    var newPlant = Plant(newId, name);
+    var newPlant = Plant(newId, name, _mainImage?.path);
 
     plantCatalog.add(newPlant);
   }
@@ -116,6 +138,12 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
                 children: <Widget>[
+                  GestureDetector(
+                    onTap: _pickMainImage,
+                    child: _mainImage == null
+                        ? Text('Tap to add image.')
+                        : Image.file(_mainImage),
+                  ),
                   TextFormField(
                     controller: _nameTextEditorController,
                     decoration: const InputDecoration(
